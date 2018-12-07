@@ -3,6 +3,7 @@
 
 import config
 import utils
+import glob
 import os
 
 
@@ -33,6 +34,13 @@ def copy_context(from_c, to_c):
     from_dict = utils.json_to_dict(from_j)
     utils.set_base_field(from_dict, config.BASE_CONTEXT_NAME, to_c)
     utils.dict_to_json(from_dict, to_j)
+
+
+def get_context_list():
+    '''get all context available
+    '''
+    json_list = glob.glob("{}/c_*.json".format(config.JSON_DIR))
+    return list(map(utils.json_to_context, json_list))
 
 
 if __name__ == '__main__':
