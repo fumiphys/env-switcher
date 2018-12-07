@@ -6,12 +6,11 @@ config file for env-switcher
 BASE_DICT = {
     "context-name": "",
     "description": "",
-    "fields": [],
+    "fields": {},
 }
 
 # field dict
 FIELD_DICT = {
-    "name": "",
     "encryption": "",
     "value": "",
 }
