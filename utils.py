@@ -3,6 +3,7 @@
 
 import json
 import config
+import base64
 import codecs
 
 
@@ -28,13 +29,17 @@ def set_base_field(b_dict, f_name, f_value):
     b_dict[f_name] = f_value
 
 
-def set_field(b_dict, f_name, fd_name, f_value):
+def set_field(b_dict, f_name, f_value, encryption=""):
     '''set dict value for field
     '''
+
     if f_name not in b_dict["fields"].keys():
         print("Warning: no fields for {}".format(f_name))
         return
-    b_dict["fields"][f_name][fd_name] = f_value
+    b_dict["fields"][f_name][config.FIELD_ENCRYPTION] = encryption
+    if encryption == "base64":
+        f_value = base64.b64encode(f_value.encode('utf-8')).decode('utf-8')
+    b_dict["fields"][f_name][config.FIELD_VALUE] = f_value
 
 
 def context_to_json(context):
@@ -61,7 +66,7 @@ if __name__ == '__main__':
     base_dict = config.BASE_DICT
     set_base_field(base_dict, "context-name", "sample")
     base_dict["fields"]["f_sample"] = config.FIELD_DICT
-    set_field(base_dict, "f_sample", "description", "sample")
+    set_field(base_dict, "f_sample", "sample", encryption="base64")
     dict_to_json(base_dict, 'out.json')
 
     print(context_to_json("sample"))
