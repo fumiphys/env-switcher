@@ -26,6 +26,8 @@ def json_to_dict(json_name):
 def set_base_field(b_dict, f_name, f_value):
     '''set dict value for base dict
     '''
+    if f_name == config.BASE_CONTEXT_NAME:
+        return
     b_dict[f_name] = f_value
 
 
@@ -33,13 +35,13 @@ def set_field(b_dict, f_name, f_value, encryption=""):
     '''set dict value for field
     '''
 
-    if f_name not in b_dict["fields"].keys():
+    if f_name not in b_dict[config.BASE_FIELDS].keys():
         print("Warning: no fields for {}".format(f_name))
-        return
-    b_dict["fields"][f_name][config.FIELD_ENCRYPTION] = encryption
+        b_dict[config.BASE_FIELDS][f_name] = {}
+    b_dict[config.BASE_FIELDS][f_name][config.FIELD_ENCRYPTION] = encryption
     if encryption == "base64":
         f_value = base64.b64encode(f_value.encode('utf-8')).decode('utf-8')
-    b_dict["fields"][f_name][config.FIELD_VALUE] = f_value
+    b_dict[config.BASE_FIELDS][f_name][config.FIELD_VALUE] = f_value
 
 
 def context_to_json(context):
@@ -59,7 +61,7 @@ def json_to_context(json_name):
     if not d_sp[-1] == "json":
         print("Warning: this file not json file")
         return ""
-    return d_sp[0].split("/")[-1][2:]
+    return d_sp[-2].split("/")[-1][2:]
 
 
 if __name__ == '__main__':
