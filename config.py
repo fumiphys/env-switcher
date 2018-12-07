@@ -2,15 +2,25 @@
 config file for env-switcher
 '''
 
+# constants
+BASE_CONTEXT_NAME = "context-name"
+BASE_DESCRIPTION = "description"
+BASE_FIELDS = "fields"
+
+FIELD_ENCRYPTION = "encryption"
+FIELD_VALUE = "value"
+
+JSON_DIR = "."
+
 # base dict
 BASE_DICT = {
-    "context-name": "",
-    "description": "",
-    "fields": {},
+    BASE_CONTEXT_NAME: "",
+    BASE_DESCRIPTION: "",
+    BASE_FIELDS: {},
 }
 
 # field dict
 FIELD_DICT = {
-    "encryption": "",
-    "value": "",
+    FIELD_ENCRYPTION: "",
+    FIELD_VALUE: "",
 }
