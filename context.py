@@ -5,6 +5,7 @@ import config
 import utils
 import glob
 import os
+import sys
 
 
 def init_context(context_name):
@@ -64,6 +65,12 @@ def get_context_list():
 
 
 if __name__ == '__main__':
-    init_context("sample")
-    copy_context("sample", "sample2")
-    update_context("sample", "description", "sample update")
+    # init_context("sample")
+    # copy_context("sample", "sample2")
+    # update_context("sample", "description", "sample update")
+    if len(sys.argv) < 3:
+        print("At least two arguments are required!")
+        sys.exit(1)
+    if sys.argv[1] == "context":
+        if sys.argv[2] == "list":
+            print(" ".join(get_context_list()))
