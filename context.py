@@ -68,9 +68,13 @@ if __name__ == '__main__':
     # init_context("sample")
     # copy_context("sample", "sample2")
     # update_context("sample", "description", "sample update")
-    if len(sys.argv) < 3:
-        print("At least two arguments are required!")
+    if len(sys.argv) < 2:
+        print("At least one argument is required!")
         sys.exit(1)
-    if sys.argv[1] == "context":
-        if sys.argv[2] == "list":
-            print(" ".join(get_context_list()))
+    if sys.argv[1] == "list":
+        print(" ".join(get_context_list()))
+    elif sys.argv[1] == "init":
+        if len(sys.argv) < 3:
+            print("one more argument is require for init.")
+            sys.exit(1)
+        init_context(sys.argv[2])
