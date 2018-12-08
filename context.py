@@ -20,6 +20,26 @@ def init_context(context_name):
     utils.dict_to_json(base_dict, json_name)
 
 
+def update_context(context_name, f_name, f_value):
+    '''update context for {context_name}
+    '''
+    json_name = utils.context_to_json(context_name)
+    c_dict = utils.json_to_dict(json_name)
+    utils.set_base_field(c_dict, f_name, f_value)
+
+    utils.dict_to_json(c_dict, json_name)
+
+
+def update_field_context(context_name, f_name, f_value, encryption=""):
+    '''update context for fields
+    '''
+    json_name = utils.context_to_json(context_name)
+    c_dict = utils.json_to_dict(json_name)
+    utils.set_field(c_dict, f_name, f_value, encryption=encryption)
+
+    utils.dict_to_json(c_dict, json_name)
+
+
 def copy_context(from_c, to_c):
     '''copy context from_c -> to_c
     '''
