@@ -78,3 +78,11 @@ if __name__ == '__main__':
             print("one more argument is require for init.")
             sys.exit(1)
         init_context(sys.argv[2])
+    elif sys.argv[1] == "edit":
+        if len(sys.argv) < 5:
+            print("three arguments are required.")
+            sys.exit(1)
+        context_name = sys.argv[2]
+        f_name = sys.argv[3]
+        f_value = sys.argv[4]
+        update_context(context_name, f_name, f_value)
