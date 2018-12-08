@@ -12,6 +12,8 @@ FIELD_VALUE = "value"
 
 JSON_DIR = "."
 
+LOG_DIR = "./logs"
+
 # base dict
 BASE_DICT = {
     BASE_CONTEXT_NAME: "",
