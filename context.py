@@ -98,3 +98,10 @@ if __name__ == '__main__':
         else:
             encryption = sys.argv[5]
             update_field_context(context_name, f_name, f_value, encryption=encryption)
+    elif sys.argv[1] == "cp":
+        if not len(sys.argv) == 4:
+            print("exactly two arguments are required.")
+            sys.exit(1)
+        from_c = sys.argv[2]
+        to_c = sys.argv[3]
+        copy_context(from_c, to_c)

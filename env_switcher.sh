@@ -5,6 +5,7 @@
 #   init: initialize context
 #   edit: update context value
 #   update: update context fields
+#   cp: copy context
 context_func() {
   case "$1" in
     "list" )
@@ -34,6 +35,13 @@ context_func() {
         return 1
       fi
       python3 context.py update "${@:2}"
+      ;;
+    "cp" )
+      if [ $# -ne 3 ]; then
+        echo "context cp requires exactly two arguments"
+        return 1
+      fi
+      python3 context.py cp "${@:2}"
       ;;
 esac
 }
