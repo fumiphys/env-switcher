@@ -66,3 +66,4 @@ def get_context_list():
 if __name__ == '__main__':
     init_context("sample")
     copy_context("sample", "sample2")
+    update_context("sample", "description", "sample update")
