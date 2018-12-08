@@ -86,3 +86,15 @@ if __name__ == '__main__':
         f_name = sys.argv[3]
         f_value = sys.argv[4]
         update_context(context_name, f_name, f_value)
+    elif sys.argv[1] == "update":
+        if len(sys.argv) < 5 or len(sys.argv) > 6:
+            print("three or four arguments are required")
+            sys.exit(1)
+        context_name = sys.argv[2]
+        f_name = sys.argv[3]
+        f_value = sys.argv[4]
+        if len(sys.argv) == 5:
+            update_field_context(context_name, f_name, f_value)
+        else:
+            encryption = sys.argv[5]
+            update_field_context(context_name, f_name, f_value, encryption=encryption)

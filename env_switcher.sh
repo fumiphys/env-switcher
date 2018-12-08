@@ -4,6 +4,7 @@
 #   list: list all context
 #   init: initialize context
 #   edit: update context value
+#   update: update context fields
 context_func() {
   case "$1" in
     "list" )
@@ -25,7 +26,15 @@ context_func() {
         echo "context edit requires exactly three argument."
         return 1
       fi
-      python3 context.py edit "$2" "$3" "$4"
+      python3 context.py edit "${@:2}"
+      ;;
+    "update" )
+      if [ $# -lt 4 -o $# -gt 5 ]; then
+        echo "context update requires three or four argument"
+        return 1
+      fi
+      python3 context.py update "${@:2}"
+      ;;
 esac
 }
 
