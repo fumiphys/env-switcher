@@ -18,15 +18,8 @@ def save_snapshot():
         os.mkdir("{}/snapshot".format(LOG_DIR))
 
     now = datetime.datetime.now()
-    log_file = "{}/snapshot/{}{}{}_{}{}{}.json".format(
-        LOG_DIR,
-        now.year,
-        now.month,
-        now.day,
-        now.hour,
-        now.minute,
-        now.second
-    )
+    log_time = '{0:%Y%m%d_%H%M%S}'.format(now)
+    log_file = "{}/snapshot/{}.json".format(LOG_DIR, log_time)
 
     with codecs.open(log_file, 'w', 'utf-8') as writer:
         json.dump(dict(os.environ), writer)
