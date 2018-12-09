@@ -21,3 +21,5 @@ swenv context cp [from_context_name] [to_context_name]
 # get list of contexts
 swenv context list
 ```
+
+for more information, see env_switcher.sh
