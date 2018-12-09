@@ -10,7 +10,7 @@ import codecs
 def dict_to_json(d_dict, json_name):
     '''write dict to json
     '''
-    with codecs.open(json_name, 'w') as writer:
+    with codecs.open(json_name, 'w', 'utf-8') as writer:
         json.dump(d_dict, writer, indent=4)
 
 
@@ -18,8 +18,8 @@ def json_to_dict(json_name):
     '''fetch dict from json
     '''
     d_dict = {}
-    with codecs.open(json_name, 'r') as writer:
-        d_dict = json.load(writer)
+    with codecs.open(json_name, 'r', 'utf-8') as reader:
+        d_dict = json.load(reader)
     return d_dict
 
 
