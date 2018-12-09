@@ -61,7 +61,7 @@ def copy_context(from_c, to_c):
 def get_context_list():
     '''get all context available
     '''
-    json_list = glob.glob("{}/c_*.json".format(config.JSON_DIR))
+    json_list = glob.glob("{}/c_*.json".format(config.get_json_dir()))
     return list(map(utils.json_to_context, json_list))
 
 

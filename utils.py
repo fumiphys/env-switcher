@@ -47,7 +47,7 @@ def set_field(b_dict, f_name, f_value, encryption=""):
 def context_to_json(context):
     '''map context name to json file
     '''
-    return "{}/c_{}.json".format(config.JSON_DIR, context)
+    return "{}/c_{}.json".format(config.get_json_dir(), context)
 
 
 def json_to_context(json_name):

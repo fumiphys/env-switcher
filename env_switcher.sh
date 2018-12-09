@@ -1,5 +1,7 @@
 #!/bin/bash
 
+script_dir="$(cd $(dirname $0); pwd)"
+
 # args:
 #   list: list all context
 #   init: initialize context
@@ -14,35 +16,35 @@ context_func() {
         echo "invalid argument: ${@:2}"
         return 1
       fi
-      python3 context.py list
+      python3 ${script_dir}/context.py list
       ;;
     "init" )
       if [ $# -ne 2 ]; then
         echo "context init requires exactly one argument."
         return 1
       fi
-      python3 context.py init "$2"
+      python3 ${script_dir}/context.py init "$2"
       ;;
     "edit" )
       if [ $# -ne 4 ]; then
         echo "context edit requires exactly three argument."
         return 1
       fi
-      python3 context.py edit "${@:2}"
+      python3 ${script_dir}/context.py edit "${@:2}"
       ;;
     "update" )
       if [ $# -lt 4 -o $# -gt 5 ]; then
         echo "context update requires three or four argument"
         return 1
       fi
-      python3 context.py update "${@:2}"
+      python3 ${script_dir}/context.py update "${@:2}"
       ;;
     "cp" )
       if [ $# -ne 3 ]; then
         echo "context cp requires exactly two arguments"
         return 1
       fi
-      python3 context.py cp "${@:2}"
+      python3 ${script_dir}/context.py cp "${@:2}"
       ;;
     "activate" )
       if [ $# -ne 2 ]; then
@@ -50,11 +52,11 @@ context_func() {
         return 1
       fi
       context_name="$2"
-      env_l=`python3 context.py activate $2 env_list`
-      env_v=`python3 context.py activate $2 env_val`
+      env_l=`python3 ${script_dir}/context.py activate $2 env_list`
+      env_v=`python3 ${script_dir}/context.py activate $2 env_val`
       env_list=()
       env_val=()
-      python3 context.py activate save_log save_log
+      python3 ${script_dir}/context.py activate save_log save_log
       for i in `echo $env_l`
       do
         env_list+=($i)
