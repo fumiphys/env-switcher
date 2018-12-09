@@ -3,6 +3,7 @@
 
 import config
 import utils
+import log_snap
 import glob
 import os
 import sys
@@ -64,6 +65,24 @@ def get_context_list():
     return list(map(utils.json_to_context, json_list))
 
 
+def get_env_list(context_name):
+    '''get list of fields
+    '''
+    json_name = utils.context_to_json(context_name)
+    d_dict = utils.json_to_dict(json_name)
+
+    return d_dict[config.BASE_FIELDS].keys()
+
+
+def get_env_val(context_name):
+    '''get list of field values
+    '''
+    json_name = utils.context_to_json(context_name)
+    d_dict = utils.json_to_dict(json_name)
+
+    return list(map(lambda x: x[config.FIELD_VALUE], d_dict[config.BASE_FIELDS].values()))
+
+
 if __name__ == '__main__':
     # init_context("sample")
     # copy_context("sample", "sample2")
@@ -105,3 +124,14 @@ if __name__ == '__main__':
         from_c = sys.argv[2]
         to_c = sys.argv[3]
         copy_context(from_c, to_c)
+    elif sys.argv[1] == "activate":
+        if not len(sys.argv) == 4:
+            print("exactly two argument is required.")
+            sys.exit(1)
+        context_name = sys.argv[2]
+        if sys.argv[3] == "env_list":
+            print(" ".join(get_env_list(context_name)))
+        elif sys.argv[3] == "env_val":
+            print(" ".join(get_env_val(context_name)))
+        elif sys.argv[3] == "save_log":
+            log_snap.save_snapshot()

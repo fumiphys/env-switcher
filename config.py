@@ -10,7 +10,7 @@ BASE_FIELDS = "fields"
 FIELD_ENCRYPTION = "encryption"
 FIELD_VALUE = "value"
 
-JSON_DIR = "."
+JSON_DIR = "./jsons"
 
 LOG_DIR = "./logs"
 

@@ -6,6 +6,7 @@
 #   edit: update context value
 #   update: update context fields
 #   cp: copy context
+#   activate: activate context
 context_func() {
   case "$1" in
     "list" )
@@ -43,12 +44,37 @@ context_func() {
       fi
       python3 context.py cp "${@:2}"
       ;;
+    "activate" )
+      if [ $# -ne 2 ]; then
+        echo "context activate requires exactly one argument"
+        return 1
+      fi
+      context_name="$2"
+      env_l=`python3 context.py activate $2 env_list`
+      env_v=`python3 context.py activate $2 env_val`
+      env_list=()
+      env_val=()
+      python3 context.py activate save_log save_log
+      for i in `echo $env_l`
+      do
+        env_list+=($i)
+      done
+      for i in `echo $env_v`
+      do
+        env_val+=($i)
+      done
+      for i in {1..${#env_list[@]}}
+      do
+        export ${env_list[$i]}=${env_val[$i]}
+      done
+      ;;
 esac
 }
 
 # args:
 #   context
 swenv() {
+  mkdir -p jsons
   case "$1" in
     "context" ) context_func ${@:2} ;;
 esac
