@@ -78,12 +78,39 @@ esac
 }
 
 # args:
+#   get: get configs
+#   set: set configs
+config_func() {
+  case "$1" in
+    "get" )
+      if [ $# -gt 2 ]; then
+        echo "config get requires zero or one arguments."
+        return 1
+      fi
+      if [ $# -eq 1 ]; then
+        python3 ${script_dir}/config.py get
+      else
+        python3 $script_dir/config.py get $2
+      fi
+      ;;
+    "set" )
+      
+      ;;
+    * )
+      echo "Error! No rule for $1."
+      return 1
+      ;;
+esac
+}
+
+# args:
 #   context
 swenv() {
   mkdir -p jsons
   touch ${script_dir}/config.json
   case "$1" in
     "context" ) context_func ${@:2} ;;
+    "config" ) config_func ${@:2} ;;
     * )
       echo "Error! No rule for $1."
       return 1

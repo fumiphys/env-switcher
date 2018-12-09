@@ -5,6 +5,7 @@ config file for env-switcher
 import codecs
 import json
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_FILE = "{}/config.json".format(BASE_DIR)
@@ -49,3 +50,18 @@ FIELD_DICT = {
     FIELD_ENCRYPTION: "",
     FIELD_VALUE: "",
 }
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("At least one argument is required")
+        sys.exit(1)
+    if sys.argv[1] == "get":
+        if len(sys.argv) == 2:
+            print("JSON_DIR : {}".format(get_json_dir()))
+            print("LOG_DIR  : {}".format(get_log_dir()))
+        elif len(sys.argv) == 3:
+            if sys.argv[2].lower() == "log_dir":
+                print("LOG_DIR  : {}".format(get_log_dir()))
+            elif sys.argv[2].lower() == "json_dir":
+                print("JSON_DIR : {}".format(get_json_dir()))
