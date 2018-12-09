@@ -94,7 +94,11 @@ config_func() {
       fi
       ;;
     "set" )
-      
+      if [ $# -ne 3 ]; then
+        echo "config set requires exactly three arguments."
+        return 1
+      fi
+      python3 ${script_dir}/config.py set $2 $3
       ;;
     * )
       echo "Error! No rule for $1."
