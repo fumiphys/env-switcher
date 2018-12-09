@@ -68,6 +68,10 @@ context_func() {
         export ${env_list[$i]}=${env_val[$i]}
       done
       ;;
+    * )
+      echo "Error! No rule for $1"
+      return 1
+      ;;
 esac
 }
 
@@ -77,5 +81,9 @@ swenv() {
   mkdir -p jsons
   case "$1" in
     "context" ) context_func ${@:2} ;;
+    * )
+      echo "Error! No rule for $1."
+      return 1
+      ;;
 esac
 }
