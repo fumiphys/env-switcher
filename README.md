@@ -20,6 +20,15 @@ swenv context cp [from_context_name] [to_context_name]
 
 # get list of contexts
 swenv context list
+
+# print context detail
+swenv context print sample
+
+# enable completion for bash
+source bash_completion.sh
+
+# enable completion for zsh
+source zsh_completion.sh
 ```
 
 for more information, see env_switcher.sh
