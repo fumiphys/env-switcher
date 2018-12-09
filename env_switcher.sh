@@ -70,6 +70,13 @@ context_func() {
         export ${env_list[$i]}=${env_val[$i]}
       done
       ;;
+    "print" )
+      if [ $# -ne 2 ]; then
+        echo "context print requires exactly one argument."
+        return 1
+      fi
+      python3 ${script_dir}/context.py "print" $2
+      ;;
     * )
       echo "Error! No rule for $1"
       return 1

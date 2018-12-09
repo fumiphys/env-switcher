@@ -4,7 +4,9 @@
 import config
 import utils
 import log_snap
+import codecs
 import glob
+import json
 import os
 import sys
 
@@ -83,6 +85,16 @@ def get_env_val(context_name):
     return list(map(lambda x: x[config.FIELD_VALUE], d_dict[config.BASE_FIELDS].values()))
 
 
+def print_json(context_name):
+    '''print json for context
+    '''
+    json_name = utils.context_to_json(context_name)
+    j_dict = {}
+    with codecs.open(json_name, 'r', 'utf-8') as reader:
+        j_dict = json.load(reader)
+    print(json.dumps(j_dict, indent=2))
+
+
 if __name__ == '__main__':
     # init_context("sample")
     # copy_context("sample", "sample2")
@@ -126,7 +138,7 @@ if __name__ == '__main__':
         copy_context(from_c, to_c)
     elif sys.argv[1] == "activate":
         if not len(sys.argv) == 4:
-            print("exactly two argument is required.")
+            print("exactly two arguments are required.")
             sys.exit(1)
         context_name = sys.argv[2]
         if sys.argv[3] == "env_list":
@@ -135,3 +147,8 @@ if __name__ == '__main__':
             print(" ".join(get_env_val(context_name)))
         elif sys.argv[3] == "save_log":
             log_snap.save_snapshot()
+    elif sys.argv[1] == "print":
+        if not len(sys.argv) == 3:
+            print("exactly two arguments are required.")
+            sys.exit(1)
+        print_json(sys.argv[2])
