@@ -9,6 +9,7 @@ script_dir="$(cd $(dirname $0); pwd)"
 #   update: update context fields
 #   cp: copy context
 #   activate: activate context
+#   print: print json
 context_func() {
   case "$1" in
     "list" )
