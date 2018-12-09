@@ -81,6 +81,7 @@ esac
 #   context
 swenv() {
   mkdir -p jsons
+  touch ${script_dir}/config.json
   case "$1" in
     "context" ) context_func ${@:2} ;;
     * )
